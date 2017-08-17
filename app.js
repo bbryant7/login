@@ -1,6 +1,7 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const app = express();
 // const data = [{username:"kitty", password:"unicorn"}]
 
@@ -9,14 +10,23 @@ app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
 app.use(bodyParser.urlencoded({ extended: false}));
+
 app.use(function (req, res, next) {
   console.log('in interceptor');
   next()
 })
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
+
+
 app.get('/', function(req, res) {
 console.log("first route");
-  res.render('login')
+  res.render('home')
 
 })
 
