@@ -9,7 +9,7 @@ app.set('view engine', 'mustache');
 
 app.get('/', function(req, res) {
 
-  res.render('login')
+  res.render('home')
 
 })
 
